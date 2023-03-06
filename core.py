@@ -2,7 +2,6 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 import collections
-import copy
 
 # dimensions
 node_input_dim = 3 # 2 for one-hot encoded node-type, 1 for scalar field
@@ -117,4 +116,4 @@ class GraphNet():
         for _ in range(self.message_passing_steps):
             graph_latent = self.step(graph_latent)
         
-        return self.decode(graph_latent) # returns decoded node features only !
+        return self.decode(graph_latent) # returns decoded node features only!
