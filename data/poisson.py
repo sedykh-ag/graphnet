@@ -8,7 +8,7 @@ from mpi4py import MPI
 from petsc4py.PETSc import ScalarType
 
 msh = mesh.create_rectangle(comm=MPI.COMM_WORLD,
-                            points=((0.0, 0.0), (1.0, 1.0)), n=(8, 8),
+                            points=((0.0, 0.0), (1.0, 1.0)), n=(16, 16),
                             cell_type=mesh.CellType.triangle,)
 V = fem.FunctionSpace(msh, ("Lagrange", 1))
 
@@ -25,7 +25,7 @@ bc = fem.dirichletbc(value=ScalarType(0), dofs=dofs, V=V)
 u = ufl.TrialFunction(V)
 v = ufl.TestFunction(V)
 x = ufl.SpatialCoordinate(msh)
-f = 10 * ufl.exp(-((x[0] - 0.5) ** 2 + (x[1] - 0.5) ** 2) / 0.02)
+f = 10 * ufl.exp(-((x[0] - 0.5) ** 2 + (x[1] - 0.5) ** 2) / 0.1)
 a = inner(grad(u), grad(v)) * dx
 L = inner(f, v) * dx
 
